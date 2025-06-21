@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limbus ID Randomizer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    body {
+        background-image: url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700373744.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        }
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 200;
+            color: #050505;
+            background-color: rgba(255, 0, 0, 0.356);
+            margin-bottom: 1px;
+            width: 100%;
+            padding: 5px;
+            letter-spacing: 3px;
+            font-size: 55px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        p {
+          font-family: 'Rubik', sans-serif;
+          font-weight: 100;
+          color: rgb(170, 157, 157);
+          font-size: 30px;
+           text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .sound-controls {
+          margin: 10px;
+          position: absolute;
+          bottom: 15px;
+          right: 15px;
+          z-index: 999;
+        }
+
+        .sound-btn {
+          font-size: 30px;
+          padding: 10px 20px;
+          background-color: #3131318a;
+          border-radius: 15px;
+          cursor: pointer;
+          margin: 5px;
+          transition: 0.3s;
+        }
+
+        .sound-btn:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #particles-js {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+
+  </style>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<body>
+
+  <div id="particles-js"></div>
+
+    <audio id="bg-audio" autoplay loop>
+    <source src="Limbus Company OST - The Corridor Story Theme.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает элемент audio.
+  </audio>
+
+  <h1>Limbus ID Randomizer</h1>
+  <p>Spin the wheel</p>
+  <iframe src="https://spinthewheel.app/beFviviUOL"
+        style="border: 0; width: 100%; max-width: 512px; height: 512px;">
+    </iframe>
+
+  <div class="sound-controls">
+    <button class="sound-btn" onclick="toggleSound()" id="sound-icon">🔊</button>
+  </div>
+
+<script>
+  // Инициализация particles.js с твоим конфигом
+  particlesJS("particles-js", {
+    "particles": {
+      "number": {
+        "value": 130,
+        "density": {
+          "enable": true,
+          "value_area": 641.3648243462085
+        }
+      },
+      "color": {
+        "value": "#914444"
+      },
+      "shape": {
+        "type": "triangle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 4
+        },
+        "image": {
+          "src": "img/github.svg",
+          "width": 50,
+          "height": 500
+        }
+      },
+      "opacity": {
+        "value": 1,
+        "random": true,
+        "anim": {
+          "enable": true,
+          "speed": 4.222,
+          "opacity_min": 0,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 2,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 4,
+          "size_min": 0.3,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": false,
+        "distance": 272.58,
+        "color": "#ffffff",
+        "opacity": 0.4,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 5,
+        "direction": "top-right",
+        "random": true,
+        "straight": true,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": false,
+          "rotateX": 600,
+          "rotateY": 600
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": false,
+          "mode": "bubble"
+        },
+        "onclick": {
+          "enable": false,
+          "mode": "repulse"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 400,
+          "line_linked": {
+            "opacity": 1
+          }
+        },
+        "bubble": {
+          "distance": 250,
+          "size": 0,
+          "duration": 2,
+          "opacity": 0,
+          "speed": 3
+        },
+        "repulse": {
+          "distance": 400,
+          "duration": 0.4
+        },
+        "push": {
+          "particles_nb": 4
+        },
+        "remove": {
+          "particles_nb": 2
+        }
+      }
+    },
+    "retina_detect": true
+  });
+
+  // Управление звуком
+  const audio = document.getElementById("bg-audio");
+  audio.volume = 0.2;
+  let isMuted = false;
+
+  function toggleSound() {
+    isMuted = !isMuted;
+    audio.muted = isMuted;
+    document.getElementById("sound-icon").textContent = isMuted ? "🔇" : "🔊";
+  }
+</script>
+
+</body>
+</html>
