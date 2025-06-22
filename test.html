@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@100;400&display=swap" rel="stylesheet" />
+
+  <title>Limbus Company ID Randomizer</title>
+  <style>
+    body {
+      background-image: url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700373744.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 50px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      background-color: rgba(255, 0, 0, 0.445);
+      color: #161616;
+      padding-top: 5px;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    #spin-all-button {
+      margin-bottom: 30px;
+      margin-top: 100px;
+      padding: 15px 40px;
+      font-size: 24px;
+      background-color: rgb(141, 21, 21);
+      font-family: 'Rubika', sans-serif;
+      font-weight: 600;
+      color: #161616;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #spin-all-button:hover {
+      background-color: rgb(233, 220, 60);
+      color: #161616;
+    }
+
+    .carousel-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    .carousel-box {
+      background: #222;
+      padding: 20px;
+      border: 2px solid #444;
+      border-radius: 10px;
+      width: 200px;
+      height: 160px;
+    }
+
+    .carousel-title {
+      font-family: 'Rubik', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #f2f2f2;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px; 
+    }
+
+
+    .carousel {
+      width: 180px;
+      height: 40px;
+      border-radius: 3px;
+      padding-top: 10px;
+      overflow: hidden;
+      margin: 0 auto;
+      border: 1px solid #555;
+      background: #333;
+    }
+
+    .items {
+      display: flex;
+      transition: transform 1s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .item {
+      min-width: 180px;
+      line-height: 38px;
+      font-size: 17px;
+      text-align: center;
+      font-family: 'Rubika', sans-serif;
+      color: #fff;
+      font-weight: 300;
+      border-right: 1px solid #555;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 34px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #777;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: 'Rubika', sans-serif;
+      color: #fff;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+</head>
+<body>
+
+  <div id="particles-js"></div>
+
+  <h1>ID Randomizer</h1>
+
+  <div class="carousel-container" id="carousel-container"></div>
+
+  <script>
+    const idLists = [
+      { title: "Yi Sang", ids: ["LCB", "Seven Assoc", "Molar Office", "The Pequod", "Dieci Assoc", "Lantern", "Blade Linage", "Spicebush", "W Corp", "The Ring Pointillist", "Solemn Lament", "Liu Assoc"] },
+      { title: "Faust", ids: ["LCB", "W corp", "L Corp Remnant", "Zwei Assoc", "Wuthering Heights", "N Corp", "Seven Assoc", "Regret", "Blade Linage", "Multicrack Office", "Ardor Blossom Star", "Heishou Mao"] },
+      { title: "Don Quixote", ids: ["LCB", "Shi Assoc", "N Corp", "Lantern", "Blade Linage", "W Corp", "Cinq Assoc South", "The Middle", "T Corp", "La Manchaland", "Cinq Assoc East"] },
+      { title: "Ryoshu", ids: ["LCB", "Seven Assoc", "LCCB", "Liu Assoc", "Yurodivy", "Kurokumo Clan", "R.B. Chef", "W Corp", "Edgar Family", "Red Eyes & Pentence", "Heishou Mao"] },
+      { title: "Meursault", ids: ["LCB", "Liu Assoc", "The Middle", "Rosespanner Workshop", "Dead Rabbit", "W Corp", "N Corp", "R Corp", "Blade Linage", "Dieci Assoc", "Cinq Assoc", "The Thumb"] },
+      { title: "Hong Lu", ids: ["LCB", "Kurokume Clan", "Liu Assoc", "W Corp", "Hook Office", "Fanghunt Office", "Tingtang Gang", "K Corp", "Dieci Assoc", "Yurodivy", "Full Stop Office", "R Corp"] },
+      { title: "Heathcliff", ids: ["LCB", "Shi Assoc", "N Corp", "Seven Assoc", "Multicrack Office", "R Corp", "Sunshower", "The Pequod", "Oufi Assoc", "Wild Hunt", "Full Stop Office", "Kurokumo Clan"] },
+      { title: "Ishmael", ids: ["LCB", "Shi Assoc", "LCCB", "Sloshing", "Edgar Family", "R Corp", "Liu Assoc", "Molar Boatworks", "The Pequod", "Zwei Assoc", "Kurokumo Clan", "Jia Family"] },
+      { title: "Rodion", ids: ["LCB", "LCCB", "N Corp", "Zwei Assoc", "T Corp", "Kurokumo Clan", "Rosespanner Workshop", "Dieci Assoc", "Liu Assoc", "Devyat Assoc", "La Manchaland", "Heishou Si"] },
+      { title: "Sinclair", ids: ["LCB", "Zwei Assoc South", "Los Mariachis", "Red Sheet", "Molar Boatworks", "Zwei Assoc West", "Blade Linage", "N Corp", "Cinq Assoc", "Dawn Office", "Devyat Assoc", "The Middle", "The Thumb"] },
+      { title: "Outis", ids: ["LCB", "Blade Linage", "G Corp", "Cinq Assoc", "The Ring Pointillist", "Seven Assoc", "Molar Office", "Magic Bullet", "Wuthering Heights", "W Corp", "La Manchaland", "Heishow Mao"] },
+      { title: "Gregor", ids: ["LCB", "Liu Assoc", "R.B. Chef", "Rosespanner Workshop", "Kurokumo Clan", "G Corp", "Zwei Assoc", "Twinhook Pirates", "Edgar Family", "La Manchaland", "Firefist Office", "Heishou Si"] }
+    ];
+
+    const container = document.getElementById("carousel-container");
+
+    idLists.forEach((entry, i) => {
+      const box = document.createElement('div');
+      box.className = 'carousel-box';
+
+      box.innerHTML = `
+        <div class="carousel-title">${entry.title}</div>
+        <div class="carousel">
+          <div class="items" id="items-${i}">
+            ${entry.ids.map(id => `<div class="item">${id}</div>`).join('')}
+          </div>
+        </div>
+        <button onclick="spin(${i})">Spin</button>
+        <div class="result" id="result-${i}"></div>
+      `;
+
+      container.appendChild(box);
+    });
+
+    function spin(index) {
+      const items = document.getElementById(`items-${index}`);
+      const resultBox = document.getElementById(`result-${index}`);
+      const itemWidth = 180;
+      const count = items.children.length;
+
+      const randomIndex = Math.floor(Math.random() * count);
+      const offset = randomIndex * itemWidth;
+
+      items.style.transform = `translateX(-${offset}px)`;
+
+    }
+
+    function spinAll() {
+      for (let i = 0; i < idLists.length; i++) {
+        spin(i);
+      }
+    }
+
+    // particles.js конфигурация
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 130,
+          "density": {
+            "enable": true,
+            "value_area": 641.36
+          }
+        },
+        "color": {
+          "value": "#914444"
+        },
+        "shape": {
+          "type": "triangle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 4
+          },
+          "image": {
+            "src": "img/github.svg",
+            "width": 50,
+            "height": 500
+          }
+        },
+        "opacity": {
+          "value": 1,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 4.222,
+            "opacity_min": 0,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 2,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 4,
+            "size_min": 0.3,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": false
+        },
+        "move": {
+          "enable": true,
+          "speed": 5,
+          "direction": "top-right",
+          "random": true,
+          "straight": true,
+          "out_mode": "out",
+          "bounce": false
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": false
+          },
+          "onclick": {
+            "enable": false
+          },
+          "resize": true
+        }
+      },
+      "retina_detect": true
+    });
+
+  </script>
+
+  <button onclick="spinAll()" id="spin-all-button">Spin All</button>
+
+</body>
+</html>
