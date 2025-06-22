@@ -51,29 +51,6 @@
       margin: 10px 0 20px;
     }
 
-    .sound-controls {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      z-index: 999;
-    }
-
-    .sound-btn {
-      font-size: 30px;
-      padding: 10px 20px;
-      background-color: #3131318a;
-      border-radius: 15px;
-      cursor: pointer;
-      margin: 5px;
-      transition: 0.3s;
-      border: none;
-      color: white;
-    }
-
-    .sound-btn:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
     #particles-js {
       position: fixed;
       top: 0;
@@ -100,10 +77,6 @@
 <body>
 
   <div id="particles-js"></div>
-
-  <audio id="bg-audio" autoplay loop>
-    <source src="background-theme.mp3" type="audio/mpeg" />
-  </audio>
 
   <h1>Limbus ID Randomizer</h1>
   <p>Spin the wheel</p>
@@ -190,17 +163,6 @@
       },
       "retina_detect": true
     });
-
-    // Управление звуком
-    const audio = document.getElementById("bg-audio");
-    audio.volume = 0.2;
-    let isMuted = false;
-
-    function toggleSound() {
-      isMuted = !isMuted;
-      audio.muted = isMuted;
-      document.getElementById("sound-icon").textContent = isMuted ? "🔇" : "🔊";
-    }
   </script>
 
 </body>
